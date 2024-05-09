@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Transaction from "./Transaction";
+import React from "react";
 
-function TransactionsList({transactions, setOnDelete}) 
-{
-
-  
-
-
- 
-  
+function TransactionsList({ transactions }) {
+    // Define the delete function
+    function handleDelete(transId) {
+      fetch(`http://localhost:8001/transactions/${transId}`, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => { 
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -25,20 +30,23 @@ function TransactionsList({transactions, setOnDelete})
           <th>
             <h3 className="ui center aligned header">Amount</h3>
           </th>
-          <th>
-            <h3 className="ui center aligned header"></h3>
-          </th>
         </tr>
-        {/* render a list of <Transaction> components here */}
-        {
-          transactions && transactions.map((trans)=>(
-           <Transaction key={trans && trans.id}  setOnDelete={ setOnDelete} trans={trans} />
-
-          ))
-        }
+        {/* Map over filtered transactions from search and render each transaction */}
+        {transactions.map((trans) => (
+          <tr key={trans.id}>
+            <td>{trans.date}</td>
+            <td>{trans.description}</td>
+            <td>{trans.category}</td>
+            <td>{trans.amount}</td>
+            <td>
+            {/* Pass the transaction id to the delete function */}
+            <button onClick={() => handleDelete(trans.id)}>Delete</button>
+          </td>
+          </tr>
+        ))}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default TransactionsList;
+export default TransactionsList
