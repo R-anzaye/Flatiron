@@ -1,40 +1,29 @@
-import React from "react";
+import React from 'react';
 
-function Transaction({trans,  setOnDelete}) {
-
-  console.log(trans)
-    // delete
-    const handleDelete = (id) =>{
-      fetch(`https://bank-of-flation-yqqn.onrender.com/transactions/${id}`, {
-        method: 'DELETE',
-       
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          // alert("Transaction deleted successfully")
-          setOnDelete(id)
-        });
-    }
+function Transaction({ transactions }) {
 
 
   return (
-<tr >
+    <table>
+      {/*Mapping is done here to get all transactions in the props */}
+      {transactions.map((trans) => (
+        <tr key={trans.id}>
           <td>
-            <p >{trans && trans.date}</p>
+            <h3>{trans.date}</h3>
           </td>
           <td>
-            <p >{trans && trans.description}n</p>
+            <h3>{trans.description}</h3>
           </td>
           <td>
-            <p >{trans && trans.category}</p>
+            <h3>{trans.category}</h3>
           </td>
           <td>
-            <p >{trans && trans.amount}</p>
+            <h3>{trans.amount}</h3>
           </td>
-          <td>
-           <button onClick={()=>handleDelete(trans && trans.id)}>Delete</button>
-          </td>
+         
         </tr>
+      ))}
+    </table>
   );
 }
 
