@@ -1,34 +1,16 @@
-import React, { useEffect, useState } from "react";
-import TransactionsList from "./TransactionsList";
+import React from "react";
 import Search from "./Search";
-import AddTransactionForm from "./AddTransactionForm";
-
-function AccountContainer() 
-{
-  const [transactions, setTransactions] = useState([])
-  const [onDelete, setOnDelete] = useState(false)
-  const [onAddTrans, setOnAddTrans] = useState(false)
-
-  useEffect(()=>{
-
-    fetch('https://bank-of-flation-yqqn.onrender.com/transactions')
-      .then((response) => response.json())
-      .then((data) => {
-
-       setTransactions(data)
-
-      } );
-
-  }, [onDelete, onAddTrans])
+// importation of react elements
 
 
+// a function with AccountContainer component with a search componet from the search file that is in the componets folder.
+function AccountContainer() {
   return (
     <div>
       <Search />
-      <AddTransactionForm setOnAddTrans={setOnAddTrans} onAddTrans={onAddTrans}/>
-      <TransactionsList transactions={transactions} setOnDelete={setOnDelete} />
+      
     </div>
   );
 }
-
+// exporting of the account container
 export default AccountContainer;
