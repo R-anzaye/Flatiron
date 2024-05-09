@@ -3,7 +3,7 @@ import React from "react";
 function TransactionsList({ transactions }) {
     // Define the delete function
     function handleDelete(transId) {
-      fetch(`http://localhost:8001/transactions/${transId}`, {
+      fetch(`https://flatiron-3.onrender.com/transaction/${transId}`, {
         method: 'DELETE',
       })
       .then(response => response.json())
