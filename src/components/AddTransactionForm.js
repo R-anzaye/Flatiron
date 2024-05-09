@@ -19,7 +19,7 @@ function AddTransactionForm() {
     setDate("")
 
 // just like javascript jsx enables us to use fetch function to fetch data from db.json and display it as post
-    fetch("https://flatiron-3.onrender.com/transaction", {
+    fetch("https://flatiron-3.onrender.com/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
